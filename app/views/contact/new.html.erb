@@ -1,0 +1,14 @@
+<div class="container">
+<h1>Contact Us</h1>
+<%= form_with url: new_contact_path, local: true do |f| %>
+  <div>
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </div>
+  <div>
+    <%= f.label :message %>
+    <%= f.text_area :message %>
+  </div>
+  <%= f.submit %>
+    <% end %>
+    </div>
