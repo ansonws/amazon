@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    belongs_to :user
     before_validation :set_default_price
     before_save :capitalize_title 
     

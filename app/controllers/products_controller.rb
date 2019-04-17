@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+    before_action :authenticate_user!, except: [:show, :index]
     before_action :find_product, only: [:show, :update, :destroy, :edit]
 
     def index
@@ -10,8 +11,8 @@ class ProductsController < ApplicationController
     end
     
     def create
-        product_params = params.require(:product).permit(:title, :description, :price)
         @product = Product.new product_params
+        @product.user_id = current_user.id
         if @product.save
             redirect_to product_path @product
         else
@@ -20,10 +21,12 @@ class ProductsController < ApplicationController
     end
 
     def show
+        @review = Review.new
+        @reviews = Review.where(product_id: @product).order(created_at: :ASC)
     end
 
     def edit
-
+        
     end
 
     def update
