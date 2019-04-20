@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    has_many :reviews, dependent: :destroy
     before_validation :set_default_price
 
     validates(
@@ -19,7 +20,7 @@ class Product < ApplicationRecord
     before_validation :capitalize_title
 
     scope(:search, ->(query) { where("title ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%" )})
-    
+
     private
 
     def set_default_price

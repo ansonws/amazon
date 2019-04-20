@@ -9,3 +9,29 @@
     method: :delete,
     data: { confirm: "Are you sure you want to delete #{@product.title}?" }
 %>
+<h2>Reviews</h2>
+<% @reviews.each do |review| %>
+    <p><%= review.rating %> out of 5</p>
+    <p><%= review.body %></p>
+    <p><%= review.created_at.strftime "%b %d, %Y" %></p>
+    <%=
+        link_to 'Delete',
+        product_review_path(@product, review), 
+        method: :delete, 
+        data: {
+            confirm: "Are you sure you want to delete review?"
+        }
+    %>
+<% end %>
+<h4>Write a Review</h4>
+<%= form_with model: [@product, @review], local: true do |f| %>
+<div>
+    <%= f.label :rating %>
+    <%= f.number_field :rating %>
+</div>
+<div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+</div>
+<%= f.submit "Write Review" %>
+<% end %>
