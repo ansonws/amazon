@@ -20,6 +20,21 @@
       <%= link_to 'Products', products_path %>
       |
       <%= link_to 'New Product', new_product_path %>
+      <% if user_signed_in? %>
+      |
+      <span>Logged in as: <%= current_user.first_name %></span>
+      |
+      <%= 
+        link_to 'Sign Out', 
+        session_path, 
+        method: :delete, 
+        data: { confirm: "Log out?"}
+      %>
+      <% else %>
+      <%= link_to 'Login', login_path %>
+      |
+      <%= link_to 'Sign Up', signup_path %>
+      <% end %>
     </nav>
     <% flash.each do |type, message| %>
           <div>

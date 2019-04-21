@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    belongs_to :user
     has_many :reviews, dependent: :destroy
     before_validation :set_default_price
 

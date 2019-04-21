@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :products do
     resources :reviews, only: [:create, :destroy]
   end
+  get '/signup', to: "users#new"
+  post '/users', to: "users#create"
+  resource :session, only: [ :create, :destroy]
+  get '/login', to: "sessions#new"
 end
